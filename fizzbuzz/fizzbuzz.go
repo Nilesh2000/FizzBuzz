@@ -1,5 +1,7 @@
 package fizzbuzz
 
+import "strconv"
+
 const (
 	FIZZ     = "Fizz"
 	BUZZ     = "Buzz"
@@ -7,16 +9,18 @@ const (
 )
 
 func FizzBuzz(n int) []string {
-	switch n {
-	case 1:
-		return []string{"1"}
-	case 3:
-		return []string{"1", "2", FIZZ}
-	case 5:
-		return []string{"1", "2", FIZZ, "4", BUZZ}
-	case 15:
-		return []string{"1", "2", FIZZ, "4", BUZZ, FIZZ, "7", "8", FIZZ, BUZZ, "11", FIZZ, "13", "14", FIZZBUZZ}
-	default:
-		return []string{}
+	result := make([]string, n)
+
+	for i := 1; i <= n; i++ {
+		if i%3 == 0 && i%5 == 0 {
+			result[i-1] = FIZZBUZZ
+		} else if i%3 == 0 {
+			result[i-1] = FIZZ
+		} else if i%5 == 0 {
+			result[i-1] = BUZZ
+		} else {
+			result[i-1] = strconv.Itoa(i)
+		}
 	}
+	return result
 }
